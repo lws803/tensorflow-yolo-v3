@@ -3,6 +3,7 @@
 import numpy as np
 import tensorflow as tf
 from PIL import ImageDraw, Image
+import cv2
 
 
 def get_boxes_and_inputs_pb(frozen_graph):
@@ -228,7 +229,7 @@ def load_coco_names(file_name):
 
 
 def draw_boxes(boxes, img, cls_names, detection_size, is_letter_box_image):
-    draw = ImageDraw.Draw(img)
+    # draw = ImageDraw.Draw(img)
 
     for cls, bboxs in boxes.items():
         color = tuple(np.random.randint(0, 256, 3))
@@ -236,9 +237,12 @@ def draw_boxes(boxes, img, cls_names, detection_size, is_letter_box_image):
             box = convert_to_original_size(box, np.array(detection_size),
                                            np.array(img.size),
                                            is_letter_box_image)
-            draw.rectangle(box, outline=color)
-            draw.text(box[:2], '{} {:.2f}%'.format(
-                cls_names[cls], score * 100), fill=color)
+            # draw.rectangle(box, outline=color)
+            # draw.text(box[:2], '{} {:.2f}%'.format(
+            #     cls_names[cls], score * 100), fill=color)
+            cv2.rectangle(img, (box[0], box[1]), (box[2], box[3]), (0, 255, 255), 1)
+
+    return img
 
 
 def convert_to_original_size(box, size, original_size, is_letter_box_image):

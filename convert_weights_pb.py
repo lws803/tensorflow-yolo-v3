@@ -15,7 +15,7 @@ tf.app.flags.DEFINE_string(
 tf.app.flags.DEFINE_string(
     'weights_file', 'yolov3.weights', 'Binary file with detector weights')
 tf.app.flags.DEFINE_string(
-    'data_format', 'NCHW', 'Data format: NCHW (gpu only) / NHWC')
+    'data_format', 'NHWC', 'Data format: NCHW (gpu only) / NHWC')
 tf.app.flags.DEFINE_string(
     'output_graph', 'frozen_darknet_yolov3_model.pb', 'Frozen tensorflow protobuf model output path')
 
